@@ -5,8 +5,12 @@ import { z } from "zod";
 import { api } from "~/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { Form, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Button } from "./ui/button";
 
-const formSchema = z.object({
+const postSchema = z.object({
   title: z.string().min(1, {
     message: "Title must not be empty",
   }),
@@ -15,48 +19,60 @@ const formSchema = z.object({
   }),
 });
 
-type FormSchema = z.infer<typeof formSchema>;
+type PostSchema = z.infer<typeof postSchema>;
 
 const PostForm = () => {
+  const postForm = useForm<z.infer<typeof postSchema>>({
+    resolver: zodResolver(postSchema),
+    defaultValues: {
+      title: "",
+      content: "",
+    },
+  });
+
   const router = useRouter();
+
   const createPost = api.post.create.useMutation({
     onSuccess: () => {
       router.refresh();
     },
   });
-  const postForm = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
-  });
 
-  const onSubmit = (values: FormSchema) => {
+  const onSubmit = (values: PostSchema) => {
     createPost.mutate(values);
     postForm.reset();
   };
 
   return (
-    <form className="flex flex-col" onSubmit={postForm.handleSubmit(onSubmit)}>
-      <input
-        {...postForm.register("title")}
-        type="text"
-        placeholder="title"
-        className="border p-2"
-      />
-      {postForm.formState.errors.title && (
-        <p>{`${postForm.formState.errors.title.message}`}</p>
-      )}
-      <textarea
-        {...postForm.register("content")}
-        placeholder="pookie talk <3"
-        className="border p-2"
-      />
-      <button
-        disabled={postForm.formState.isSubmitting}
-        type="submit"
-        className=" rounded-lg bg-purple-300 px-4 py-2 text-lg font-bold disabled:opacity-55"
-      >
-        Submit
-      </button>
-    </form>
+    <Form {...postForm}>
+      <form onSubmit={postForm.handleSubmit(onSubmit)}>
+        <FormField
+          control={postForm.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Title</FormLabel>
+              <Input placeholder="Kiana's blog post!" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={postForm.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Content</FormLabel>
+              <Textarea
+                placeholder="Whatever pookie feels like talking about <3"
+                {...field}
+              />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   );
 };
 
