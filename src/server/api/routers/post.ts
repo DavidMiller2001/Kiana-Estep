@@ -17,4 +17,14 @@ export const postRouter = createTRPCRouter({
         },
       });
     }),
+  delete: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const data = await ctx.db.post.delete({
+        where: {
+          id: input.id,
+        },
+      });
+      return data;
+    }),
 });
