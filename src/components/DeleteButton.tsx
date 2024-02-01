@@ -7,7 +7,6 @@ const DeleteButton = (props: { id: number }) => {
   const router = useRouter();
   const deletePost = api.post.delete.useMutation({
     onSuccess: () => {
-      console.log("deleted!");
       router.refresh();
     },
   });

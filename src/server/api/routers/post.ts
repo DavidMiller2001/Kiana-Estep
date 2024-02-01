@@ -7,6 +7,16 @@ export const postRouter = createTRPCRouter({
     const data = await ctx.db.post.findMany();
     return data;
   }),
+  getOne: publicProcedure
+    .input(z.object({ title: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      const post = await ctx.db.post.findFirst({
+        where: {
+          title: input.title,
+        },
+      });
+      return post;
+    }),
   create: publicProcedure
     .input(z.object({ title: z.string().min(1), content: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {

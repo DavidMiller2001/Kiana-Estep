@@ -1,3 +1,4 @@
+import Link from "next/link";
 import DeleteButton from "~/components/DeleteButton";
 import PostForm from "~/components/PostForm";
 import { api } from "~/trpc/server";
@@ -13,7 +14,9 @@ const Blog = async () => {
             return (
               <li key={post.title} className="flex justify-between">
                 <div>
-                  <h2 className="text-xl font-bold">{post.title}</h2>
+                  <Link href={`/blog/${post.title}`}>
+                    <h2 className="text-xl font-bold">{post.title}</h2>
+                  </Link>
                   <p>{post.content}</p>
                 </div>
                 <DeleteButton id={post.id} />

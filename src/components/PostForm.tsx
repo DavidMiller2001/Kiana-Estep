@@ -45,7 +45,7 @@ const PostForm = () => {
 
   return (
     <Form {...postForm}>
-      <form onSubmit={postForm.handleSubmit(onSubmit)}>
+      <form onSubmit={postForm.handleSubmit(onSubmit)} className="p-4">
         <FormField
           control={postForm.control}
           name="title"
@@ -70,7 +70,9 @@ const PostForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="mt-4">
+          Post!
+        </Button>
       </form>
     </Form>
   );
