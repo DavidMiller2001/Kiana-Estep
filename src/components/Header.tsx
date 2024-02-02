@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <header className="sticky top-0 bg-purple-300 py-4">
-        <div className="m-auto flex w-full max-w-6xl justify-between">
+        <div className="m-auto flex w-full max-w-6xl justify-between px-4 xl:px-0">
           <img src="/" alt="Logo" />
           <nav>
             <ul className="flex gap-4">
