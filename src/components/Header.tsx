@@ -10,7 +10,7 @@ const Header = () => {
           <nav>
             <ul className="flex gap-4">
               <li>
-                <Link href="#">Work</Link>
+                <Link href="/">Work</Link>
               </li>
               <li>
                 <Link href="/">About</Link>
@@ -22,7 +22,7 @@ const Header = () => {
                 <Link href="/blog">Blog</Link>
               </li>
               <li>
-                <Link href="/">Contact</Link>
+                <Link href="/contact">Contact</Link>
               </li>
               <li>
                 <Link href="/">Shop</Link>

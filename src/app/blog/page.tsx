@@ -7,9 +7,9 @@ const Blog = async () => {
   const blogPosts = await api.post.getAll.query();
   return (
     <>
-      <main className="m-auto w-full max-w-6xl border-x-2 border-slate-500">
+      <main className="mx-auto max-w-xl">
         <PostForm />
-        <ul className="flex flex-col gap-4 p-8">
+        <ul className="m-auto flex w-full max-w-6xl flex-col gap-4 p-8">
           {blogPosts.map((post) => {
             return (
               <li key={post.title} className="flex justify-between">

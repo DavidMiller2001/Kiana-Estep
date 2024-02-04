@@ -45,14 +45,21 @@ const PostForm = () => {
 
   return (
     <Form {...postForm}>
-      <form onSubmit={postForm.handleSubmit(onSubmit)} className="p-4">
+      <form
+        onSubmit={postForm.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 pt-8"
+      >
         <FormField
           control={postForm.control}
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
-              <Input placeholder="Kiana's blog post!" {...field} />
+              <FormLabel className="text-2xl">Title</FormLabel>
+              <Input
+                placeholder="Kiana's blog post!"
+                {...field}
+                className="text-lg"
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -62,15 +69,20 @@ const PostForm = () => {
           name="content"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Content</FormLabel>
+              <FormLabel className="text-2xl">Content</FormLabel>
               <Textarea
                 placeholder="Whatever pookie feels like talking about <3"
                 {...field}
+                className="text-lg"
               />
+              <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="mt-4">
+        <Button
+          type="submit"
+          className="mt-4 w-full py-6 text-2xl font-semibold"
+        >
           Post!
         </Button>
       </form>
