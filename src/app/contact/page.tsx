@@ -74,7 +74,12 @@ const ContactForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Input placeholder="you@something.com" type="email" />
+              <Input
+                placeholder="you@something.com"
+                type="email"
+                value={field.value}
+                onChange={field.onChange}
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -93,7 +98,11 @@ const ContactForm = () => {
                 </FormControl>
                 <SelectContent>
                   {categories.map((category) => (
-                    <SelectItem value={category} key={category}>
+                    <SelectItem
+                      value={category}
+                      key={category}
+                      onChange={() => {}}
+                    >
                       {category}
                     </SelectItem>
                   ))}
@@ -108,7 +117,12 @@ const ContactForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Message</FormLabel>
-              <Textarea placeholder="message" />
+              <Textarea
+                placeholder="message"
+                value={field.value}
+                onChange={field.onChange}
+              />
+              <FormMessage />
             </FormItem>
           )}
         />
